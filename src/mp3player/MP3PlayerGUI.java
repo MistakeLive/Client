@@ -19,7 +19,6 @@ import javax.swing.table.TableModel;
 import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
-import java.sql.*;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
@@ -31,22 +30,6 @@ public class MP3PlayerGUI extends javax.swing.JFrame {
     int count = 0;
 
     Vector sb;
-
-    String url = "jdbc:mysql://localhost:3306/javabase"+
-            "?verifyServerCertificate=false"+
-            "&useSSL=false"+
-            "&requireSSL=false"+
-            "&useLegacyDatetimeCode=false"+
-            "&amp"+
-            "&serverTimezone=UTC";
-    String user = "root";
-    String password = "admin";
-
-    // JDBC variables for opening and managing connection
-    Connection con = null;
-    Statement stmt = null;
-    ResultSet rs = null;
-
 
     public MP3PlayerGUI() {
         sb = getBase();
