@@ -39,6 +39,7 @@ public class MainClass
     {
         if (fl == 0){
             try {
+                file = fileToPlay;
                 FIS = new ByteArrayInputStream(fileToPlay);
                 BIS = new BufferedInputStream(FIS);
 

@@ -14,11 +14,11 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
-import java.net.URL;
 import java.sql.*;
 import java.util.StringTokenizer;
 import java.util.Vector;
@@ -167,6 +167,9 @@ public class MP3PlayerGUI extends javax.swing.JFrame {
             HttpClient client = new HttpClient();
             int status = client.executeMethod(filePost);
 
+            DefaultTableModel model = (DefaultTableModel) songTable.getModel();
+            model.addRow(new Object[] {myFile.getName()});
+
         }
     }//GEN-LAST:event_SelectFileMouseReleased
 
@@ -197,6 +200,7 @@ public class MP3PlayerGUI extends javax.swing.JFrame {
         } finally {
             IOUtils.closeQuietly(httpClient);
         }
+        Display.setText(name);
         MC.Play(file);
 
     }
