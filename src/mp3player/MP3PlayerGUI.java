@@ -166,14 +166,13 @@ public class MP3PlayerGUI extends javax.swing.JFrame {
 
         String name = String.valueOf(model.getValueAt(rowIndex, 0).toString());
 
-        name.replace(" ", "%23");
 
         byte[] file = null;
 
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         try{
 
-            String uri = "http://localhost:8080/songs/" + name;
+            String uri = "http://localhost:8080/songs/" + name.replace(" ", "%20");
             HttpGet get = new HttpGet(uri);
             HttpResponse response = httpClient.execute(get);
 
