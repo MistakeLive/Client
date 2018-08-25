@@ -46,6 +46,8 @@ public class MP3PlayerGUI extends javax.swing.JFrame {
         Background = new javax.swing.JLabel();
         songTable = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane(songTable);
+        textField = new javax.swing.JTextField();
+        Find = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -86,7 +88,19 @@ public class MP3PlayerGUI extends javax.swing.JFrame {
         Display.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         getContentPane().add(Display, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 10, 310, 20));
 
-        javax.swing.table.DefaultTableModel tdm = new javax.swing.table.DefaultTableModel();
+        textField.setFont(new java.awt.Font("Times New Roman", 0, 14));
+        getContentPane().add(textField, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 270, 25));
+
+        Find.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                FindMouseReleased(evt);
+            }
+        });
+        Find.setFont(new java.awt.Font("Times New Roman", 0, 14));
+        Find.setText("Найти");
+        getContentPane().add(Find, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 80, 25));
+
+        DefaultTableModel tdm = new DefaultTableModel();
 
         String [] st  = new String [] {"Song Name"};
 
@@ -100,16 +114,13 @@ public class MP3PlayerGUI extends javax.swing.JFrame {
 
         songTable.setModel(tdm);
 
-
         jScrollPane1.setViewportView(songTable);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 350, 240));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 350, 240));
 
-        Background.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mp3player/Background.png"))); // NOI18N
         Background.setAutoscrolls(true);
         getContentPane().add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
 
         songTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -155,6 +166,25 @@ public class MP3PlayerGUI extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_SelectFileMouseReleased
+
+    private void FindMouseReleased(java.awt.event.MouseEvent evt) {
+        String request = textField.getText();
+        DefaultTableModel tdm = new DefaultTableModel();
+
+        String [] st  = new String [] {"Song Name"};
+
+        tdm.setColumnIdentifiers(st);
+
+        for (int i=0; i < count; i++){
+            Vector data_rows = new Vector();
+            if (sb.elementAt(i).toString().lastIndexOf(request) != (-1)) {
+                data_rows.addElement(sb.elementAt(i));
+                tdm.addRow(data_rows);
+            }
+        }
+
+        songTable.setModel(tdm);
+    }
 
     private void songTableMouseClicked(java.awt.event.MouseEvent evt) {
 
@@ -256,5 +286,7 @@ public class MP3PlayerGUI extends javax.swing.JFrame {
     private javax.swing.JLabel Stop;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable songTable;
+    private javax.swing.JTextField textField;
+    private javax.swing.JButton Find;
 
 }
